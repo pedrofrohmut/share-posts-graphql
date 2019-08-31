@@ -1,0 +1,3 @@
+CLIENT_URL = "<client-app-url>"
+JWT_SECRET = "<min-16-characters-secret>"
+ConnectionStrings:PostgreSQL:SharePostsDb = "<postgresql-connection-string>"
