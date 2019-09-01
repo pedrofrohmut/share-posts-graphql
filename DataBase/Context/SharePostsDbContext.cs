@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SharePosts.DataBase.Entities;
 
-namespace SharePosts.DataBase.Models
+namespace SharePosts.DataBase.Context
 {
   public class SharePostsDbContext : IdentityDbContext
   {

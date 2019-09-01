@@ -1,6 +1,6 @@
 using System;
 
-namespace SharePosts.DataBase.Models
+namespace SharePosts.DataBase.Entities
 {
   public class Post
   {

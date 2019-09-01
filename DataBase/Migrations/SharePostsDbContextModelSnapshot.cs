@@ -2,13 +2,12 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using SharePosts.DataBase.Models;
+using SharePosts.DataBase.Context;
 
 namespace DataBase.Migrations
 {
-    [DbContext(typeof(SharePostsDbContext))]
+  [DbContext(typeof(SharePostsDbContext))]
     partial class SharePostsDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
