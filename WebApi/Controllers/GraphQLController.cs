@@ -40,8 +40,7 @@ namespace SharePosts.WebApi.Controllers
       {
         return BadRequest(new
         {
-          message =
-            "The Query cannot be null. You must inform a graphql query in the POST request body"
+          message = "The Query cannot be null. You must inform a graphql query in the POST request body"
         });
       }
       var inputs = requestQuery.Variables?.ToInputs();
@@ -126,8 +125,12 @@ namespace SharePosts.WebApi.Controllers
         };
         await this.dbContext.AddRangeAsync(posts);
         this.dbContext.SaveChanges();
+        return Ok("Database Seeded");
       }
-      return Ok("Database Seeded");
+      else
+      {
+        return Ok("Data already seeded");
+      }
     }
   }
 }
