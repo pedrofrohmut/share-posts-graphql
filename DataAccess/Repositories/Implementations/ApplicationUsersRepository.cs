@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SharePosts.DataBase.Context;
 using SharePosts.DataBase.Entities;
 
@@ -8,26 +11,33 @@ namespace SharePosts.DataAccess.Repositories.Implementations
   public class ApplicationUsersRepository : IApplicationUsersRepository
   {
     private readonly SharePostsDbContext context;
+    private readonly UserManager<ApplicationUser> userManager;
 
-    public ApplicationUsersRepository(SharePostsDbContext context)
+    public ApplicationUsersRepository(
+        SharePostsDbContext context,
+        UserManager<ApplicationUser> userManager)
     {
       this.context = context;
+      this.userManager = userManager;
     }
 
-    public void Create(ApplicationUser newUser)
+    public async Task<ApplicationUser> Create(ApplicationUser newUser, string password)
     {
-      throw new System.NotImplementedException();
+      if (String.IsNullOrWhiteSpace(newUser.UserName))
+      {
+        newUser.UserName = newUser.Email;
+      }
+      await this.userManager.CreateAsync(newUser, password);
+      return newUser;
     }
 
-    public ApplicationUser FindByEmail(string email)
-    {
-      throw new System.NotImplementedException();
-    }
+    public async Task<ApplicationUser> FindByEmail(string email) =>
+      await this.userManager.FindByEmailAsync(email);
 
-    public IEnumerable<ApplicationUser> GetAll() => 
-      this.context.ApplicationUsers.ToList();
+    public async Task<IEnumerable<ApplicationUser>> GetAll() =>
+      await this.context.ApplicationUsers.ToListAsync();
 
-    public string GetAuthenticationToken(string email, string password)
+    public async Task<string> GetAuthenticationToken(string email, string password)
     {
       throw new System.NotImplementedException();
     }

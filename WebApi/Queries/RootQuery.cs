@@ -17,8 +17,10 @@ namespace SharePosts.WebApi.Queries
 
       Field<ApplicationUserType>(
         "applicationUser",
-        arguments: new QueryArguments(new QueryArgument<StringGraphType> { Name = "email" }),
-        resolve: (context) => applicationUserRepository.FindByEmail(context.GetArgument<string>("email"))
+        arguments: new QueryArguments(
+          new QueryArgument<StringGraphType> { Name = "email" }),
+        resolve: (context) => applicationUserRepository
+          .FindByEmail(context.GetArgument<string>("email"))
       );
     }
   }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SharePosts.DataBase.Context;
@@ -9,9 +10,10 @@ using SharePosts.DataBase.Context;
 namespace DataBase.Migrations
 {
     [DbContext(typeof(SharePostsDbContext))]
-    partial class SharePostsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190904221829_AlterTableAddPasswordToUser")]
+    partial class AlterTableAddPasswordToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -208,6 +210,8 @@ namespace DataBase.Migrations
             modelBuilder.Entity("SharePosts.DataBase.Entities.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Password");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });

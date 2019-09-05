@@ -7,6 +7,7 @@ namespace SharePosts.WebApi.Types
   {
     public PostType()
     {
+      Name = "Post";
       Field(post => post.Id);
       Field(post => post.Title);
       Field(post => post.Body);

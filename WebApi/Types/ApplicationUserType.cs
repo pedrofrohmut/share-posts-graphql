@@ -7,10 +7,12 @@ namespace SharePosts.WebApi.Types
   {
     public ApplicationUserType()
     {
+      Name = "ApplicationUser";
       Field(x => x.Id);
       Field(x => x.UserName);
       Field(x => x.Email);
       Field(x => x.EmailConfirmed);
+      Field(x => x.Password);
     }
   }
 }

@@ -12,6 +12,7 @@ using SharePosts.DataAccess.Repositories;
 using SharePosts.DataAccess.Repositories.Implementations;
 using SharePosts.DataBase.Context;
 using SharePosts.DataBase.Entities;
+using SharePosts.WebApi.Mutations;
 using SharePosts.WebApi.Queries;
 using SharePosts.WebApi.Schema;
 using SharePosts.WebApi.Types;
@@ -55,15 +56,11 @@ namespace WebApi
       services.AddTransient<IPostsRepository, PostsRepository>();
       // Query
       services.AddSingleton<RootQuery>();
-      /* services.AddSingleton<ApplicationUsersQuery>(); */
-      /* services.AddSingleton<PostsQuery>(); */
       // Mutations
-      /* services.AddSingleton<RootMutation>(); */
-      /* services.AddSingleton<ApplicationUserMutation>(); */
-      /* services.AddSingleton<PostsMutation>(); */
+      services.AddSingleton<RootMutation>();
       // Types
       services.AddSingleton<ApplicationUserType>();
-      /* services.AddSingleton<ApplicationUserInputType>(); */
+      services.AddSingleton<ApplicationUserInputType>();
       /* services.AddSingleton<PostType>(); */
       /* services.AddSingleton<PostInputType>(); */
       var serviceProvider = services.BuildServiceProvider();

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using SharePosts.DataBase.Entities;
 
 namespace SharePosts.DataAccess.Repositories
@@ -8,21 +9,21 @@ namespace SharePosts.DataAccess.Repositories
     /*
      * Mutation: Create a new user with email and password
      */
-    void Create(ApplicationUser newUser);
+    Task<ApplicationUser> Create(ApplicationUser newUser, string password);
 
     /*
      * Query: Find Application User with an email parameter
      */
-    ApplicationUser FindByEmail(string email);
+    Task<ApplicationUser> FindByEmail(string email);
 
     /*
      * Query: Get All ApplicationUsers
      */
-    IEnumerable<ApplicationUser> GetAll();
+    Task<IEnumerable<ApplicationUser>> GetAll();
 
     /*
      * Query: Get Authentication Token passing email and password (Sign In)
      */
-    string GetAuthenticationToken(string email, string password);
+    Task<string> GetAuthenticationToken(string email, string password);
   }
 }

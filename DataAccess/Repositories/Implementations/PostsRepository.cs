@@ -1,31 +1,32 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using SharePosts.DataBase.Entities;
 
 namespace SharePosts.DataAccess.Repositories.Implementations
 {
   public class PostsRepository : IPostsRepository
   {
-    public void Create(Post newPost)
+    public Task Create(Post newPost)
     {
       throw new System.NotImplementedException();
     }
 
-    public void Delete(string id)
+    public Task Delete(string id)
     {
       throw new System.NotImplementedException();
     }
 
-    public Post FindById(string id)
+    public Task<Post> FindById(string id)
     {
       throw new System.NotImplementedException();
     }
 
-    public IEnumerable<Post> GetAll()
+    public Task<IEnumerable<Post>> GetAll()
     {
       throw new System.NotImplementedException();
     }
 
-    public void Update(string id, Post updatedPost)
+    public Task Update(string id, Post updatedPost)
     {
       throw new System.NotImplementedException();
     }

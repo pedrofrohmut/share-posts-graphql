@@ -1,4 +1,5 @@
 using GraphQL;
+using SharePosts.WebApi.Mutations;
 using SharePosts.WebApi.Queries;
 
 namespace SharePosts.WebApi.Schema
@@ -8,6 +9,7 @@ namespace SharePosts.WebApi.Schema
     public SharePostsSchema(IDependencyResolver resolver) : base(resolver)
     {
       Query = resolver.Resolve<RootQuery>();
+      Mutation = resolver.Resolve<RootMutation>();
     }
   }
 }
