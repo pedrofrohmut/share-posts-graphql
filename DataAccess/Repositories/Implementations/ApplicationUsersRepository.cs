@@ -34,6 +34,9 @@ namespace SharePosts.DataAccess.Repositories.Implementations
     public async Task<ApplicationUser> FindByEmail(string email) =>
       await this.userManager.FindByEmailAsync(email);
 
+    public async Task<ApplicationUser> FindById(string id) =>
+      await this.userManager.FindByIdAsync(id);
+
     public async Task<IEnumerable<ApplicationUser>> GetAll() =>
       await this.context.ApplicationUsers.ToListAsync();
 

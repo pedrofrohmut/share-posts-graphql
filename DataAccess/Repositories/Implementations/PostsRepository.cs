@@ -1,34 +1,58 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using SharePosts.DataBase.Context;
 using SharePosts.DataBase.Entities;
 
 namespace SharePosts.DataAccess.Repositories.Implementations
 {
   public class PostsRepository : IPostsRepository
   {
-    public Task Create(Post newPost)
+    private readonly SharePostsDbContext context;
+
+    public PostsRepository(SharePostsDbContext context)
     {
-      throw new System.NotImplementedException();
+      this.context = context;
     }
 
-    public Task Delete(string id)
+    public async Task Create(Post newPost)
     {
-      throw new System.NotImplementedException();
+      await this.context.Posts.AddAsync(newPost);
+      await this.context.SaveChangesAsync();
     }
 
-    public Task<Post> FindById(string id)
+    public async Task Delete(string id)
     {
-      throw new System.NotImplementedException();
+      var postDb = await this.context.Posts
+        .FirstOrDefaultAsync(post => post.Id == id);
+      if (postDb != null) 
+      {
+        this.context.Remove(postDb);
+        await this.context.SaveChangesAsync();
+      }
     }
 
-    public Task<IEnumerable<Post>> GetAll()
-    {
-      throw new System.NotImplementedException();
-    }
+    public async Task<Post> FindById(string id) =>
+      await this.context.Posts
+        .FirstOrDefaultAsync(post => post.Id == id);
 
-    public Task Update(string id, Post updatedPost)
+    public async Task<IEnumerable<Post>> GetAll() =>
+      await this.context.Posts
+        .OrderBy(post => post.CreatedAt)
+        .ToListAsync();
+
+    public async Task Update(string id, Post updatedPost)
     {
-      throw new System.NotImplementedException();
+      var postDb = await this.context.Posts
+        .FirstOrDefaultAsync(post => post.Id == id);
+      if (postDb != null) 
+      {
+        postDb.Title = updatedPost.Title;
+        postDb.Body = updatedPost.Body;
+        this.context.Posts.Update(postDb);
+        await this.context.SaveChangesAsync();
+      }
     }
   }
 }

@@ -17,6 +17,11 @@ namespace SharePosts.DataAccess.Repositories
     Task<ApplicationUser> FindByEmail(string email);
 
     /*
+     * Query: Find Application User by its Id
+     */
+    Task<ApplicationUser> FindById(string id);
+
+    /*
      * Query: Get All ApplicationUsers
      */
     Task<IEnumerable<ApplicationUser>> GetAll();

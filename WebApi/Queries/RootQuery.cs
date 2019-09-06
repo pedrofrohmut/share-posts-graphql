@@ -10,17 +10,32 @@ namespace SharePosts.WebApi.Queries
         IPostsRepository postsRepository,
         IApplicationUsersRepository applicationUserRepository)
     {
+      Name = "Query";
+
       Field<ListGraphType<ApplicationUserType>>(
         "allApplicationUser",
-        resolve: (context) => applicationUserRepository.GetAll()
+        resolve: context => applicationUserRepository.GetAll()
       );
 
       Field<ApplicationUserType>(
         "applicationUser",
         arguments: new QueryArguments(
           new QueryArgument<StringGraphType> { Name = "email" }),
-        resolve: (context) => applicationUserRepository
+        resolve: context => applicationUserRepository
           .FindByEmail(context.GetArgument<string>("email"))
+      );
+
+      Field<ListGraphType<PostType>>(
+        "allPost",
+        resolve: context => postsRepository.GetAll()
+      );
+
+      Field<PostType>(
+        "post",
+        arguments: new QueryArguments(
+          new QueryArgument<StringGraphType> { Name = "id" }),
+        resolve: context => 
+          postsRepository.FindById(context.GetArgument<string>("id"))
       );
     }
   }

@@ -17,7 +17,7 @@ namespace SharePosts.DataAccess.Repositories
     Task<Post> FindById(string id);
 
     /*
-     * Query: Creates a new Post
+     * Mutation: Creates a new Post
      */
     Task Create(Post newPost);
 

@@ -9,6 +9,8 @@ namespace SharePosts.WebApi.Mutations
   {
     public RootMutation(IApplicationUsersRepository repo)
     {
+      Name = "Mutation";
+
       Field<ApplicationUserType>
       (
         "createApplicationUser",

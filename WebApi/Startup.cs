@@ -61,7 +61,7 @@ namespace WebApi
       // Types
       services.AddSingleton<ApplicationUserType>();
       services.AddSingleton<ApplicationUserInputType>();
-      /* services.AddSingleton<PostType>(); */
+      services.AddSingleton<PostType>();
       /* services.AddSingleton<PostInputType>(); */
       var serviceProvider = services.BuildServiceProvider();
       // Schema
