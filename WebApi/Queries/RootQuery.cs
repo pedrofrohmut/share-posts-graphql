@@ -13,12 +13,12 @@ namespace SharePosts.WebApi.Queries
       Name = "Query";
 
       Field<ListGraphType<ApplicationUserType>>(
-        "allApplicationUser",
+        "AllApplicationUser",
         resolve: context => applicationUserRepository.GetAll()
       );
 
       Field<ApplicationUserType>(
-        "applicationUser",
+        "ApplicationUser",
         arguments: new QueryArguments(
           new QueryArgument<StringGraphType> { Name = "email" }),
         resolve: context => applicationUserRepository
@@ -26,12 +26,12 @@ namespace SharePosts.WebApi.Queries
       );
 
       Field<ListGraphType<PostType>>(
-        "allPost",
+        "AllPost",
         resolve: context => postsRepository.GetAll()
       );
 
       Field<PostType>(
-        "post",
+        "Post",
         arguments: new QueryArguments(
           new QueryArgument<StringGraphType> { Name = "id" }),
         resolve: context => 

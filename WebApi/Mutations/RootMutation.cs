@@ -14,9 +14,9 @@ namespace SharePosts.WebApi.Mutations
       Name = "Mutation";
 
       Field<ApplicationUserType>(
-        "createApplicationUser",
+        "CreateApplicationUser",
         arguments: new QueryArguments(
-          new QueryArgument<ApplicationUserInputType> { Name = "newApplicationUser" }),
+          new QueryArgument<NonNullGraphType<ApplicationUserInputType>> { Name = "newApplicationUser" }),
         resolve: context => {
           var user = context.GetArgument<ApplicationUser>("newApplicationUser");
           return applicationUserRepository.Create(user, user.Password);
@@ -24,12 +24,25 @@ namespace SharePosts.WebApi.Mutations
       );
 
       Field<PostType>(
-        "createPost",
+        "CreatePost",
         arguments: new QueryArguments(
-          new QueryArgument<PostInputType> { Name = "newPost" }),
+          new QueryArgument<NonNullGraphType<PostInputType>> { Name = "newPost" }),
         resolve: context => {
           var newPost = context.GetArgument<Post>("newPost");
           return postRepository.Create(newPost);
+        }
+      );
+
+      Field<PostType>(
+        "UpdatePost",
+        arguments: new QueryArguments(
+          new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "postId" },
+          new QueryArgument<NonNullGraphType<PostInputType>> { Name = "updatedPost" }),
+        resolve: context => {
+          var postId = context.GetArgument<string>("postId");
+          var updatedPost = context.GetArgument<Post>("updatedPost");
+          updatedPost.Id = postId;
+          return postRepository.Update(postId, updatedPost);
         }
       );
     }
