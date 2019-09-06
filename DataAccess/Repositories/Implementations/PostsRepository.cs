@@ -16,13 +16,14 @@ namespace SharePosts.DataAccess.Repositories.Implementations
       this.context = context;
     }
 
-    public async Task Create(Post newPost)
+    public async Task<Post> Create(Post newPost)
     {
       await this.context.Posts.AddAsync(newPost);
       await this.context.SaveChangesAsync();
+      return newPost;
     }
 
-    public async Task Delete(string id)
+    public async Task<Post> Delete(string id)
     {
       var postDb = await this.context.Posts
         .FirstOrDefaultAsync(post => post.Id == id);
@@ -31,6 +32,7 @@ namespace SharePosts.DataAccess.Repositories.Implementations
         this.context.Remove(postDb);
         await this.context.SaveChangesAsync();
       }
+      return postDb;
     }
 
     public async Task<Post> FindById(string id) =>
@@ -42,7 +44,7 @@ namespace SharePosts.DataAccess.Repositories.Implementations
         .OrderBy(post => post.CreatedAt)
         .ToListAsync();
 
-    public async Task Update(string id, Post updatedPost)
+    public async Task<Post> Update(string id, Post updatedPost)
     {
       var postDb = await this.context.Posts
         .FirstOrDefaultAsync(post => post.Id == id);
@@ -53,6 +55,7 @@ namespace SharePosts.DataAccess.Repositories.Implementations
         this.context.Posts.Update(postDb);
         await this.context.SaveChangesAsync();
       }
+      return updatedPost;
     }
   }
 }

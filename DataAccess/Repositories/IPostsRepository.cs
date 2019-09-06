@@ -19,16 +19,16 @@ namespace SharePosts.DataAccess.Repositories
     /*
      * Mutation: Creates a new Post
      */
-    Task Create(Post newPost);
+    Task<Post> Create(Post newPost);
 
     /*
      * Mutation: Update the target post of the passed id with the updatedPost body
      */
-    Task Update(string id, Post updatedPost);
+    Task<Post> Update(string id, Post updatedPost);
 
     /*
      * Mutation: Delete an post with the passed id
      */
-    Task Delete(string id);
+    Task<Post> Delete(string id);
   }
 }

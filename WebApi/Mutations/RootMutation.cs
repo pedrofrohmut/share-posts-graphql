@@ -7,23 +7,31 @@ namespace SharePosts.WebApi.Mutations
 {
   public class RootMutation : ObjectGraphType
   {
-    public RootMutation(IApplicationUsersRepository repo)
+    public RootMutation(
+        IApplicationUsersRepository applicationUserRepository,
+        IPostsRepository postRepository)
     {
       Name = "Mutation";
 
-      Field<ApplicationUserType>
-      (
+      Field<ApplicationUserType>(
         "createApplicationUser",
-        arguments: new QueryArguments
-        (
-          new QueryArgument<ApplicationUserInputType> { Name = "newApplicationUser" }
-        ),
-        resolve: context =>
-        {
+        arguments: new QueryArguments(
+          new QueryArgument<ApplicationUserInputType> { Name = "newApplicationUser" }),
+        resolve: context => {
           var user = context.GetArgument<ApplicationUser>("newApplicationUser");
-          return repo.Create(user, user.Password);
+          return applicationUserRepository.Create(user, user.Password);
         }
       );
+
+      Field<PostType>(
+        "createPost",
+        arguments: new QueryArguments(
+          new QueryArgument<PostInputType> { Name = "newPost" }),
+        resolve: context => {
+          var newPost = context.GetArgument<Post>("newPost");
+          return postRepository.Create(newPost);
+        }
+      )
     }
   }
 }
