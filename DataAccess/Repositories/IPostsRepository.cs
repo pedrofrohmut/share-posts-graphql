@@ -24,7 +24,7 @@ namespace SharePosts.DataAccess.Repositories
     /*
      * Mutation: Update the target post of the passed id with the updatedPost body
      */
-    Task<Post> Update(string id, Post updatedPost);
+    Task<Post> Update(Post updatedPost);
 
     /*
      * Mutation: Delete an post with the passed id

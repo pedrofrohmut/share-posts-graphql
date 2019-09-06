@@ -27,23 +27,21 @@ namespace SharePosts.WebApi.Mutations
         "CreatePost",
         arguments: new QueryArguments(
           new QueryArgument<NonNullGraphType<PostInputType>> { Name = "newPost" }),
-        resolve: context => {
-          var newPost = context.GetArgument<Post>("newPost");
-          return postRepository.Create(newPost);
-        }
+        resolve: context => postRepository.Create(context.GetArgument<Post>("newPost"))
       );
 
       Field<PostType>(
         "UpdatePost",
         arguments: new QueryArguments(
-          new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "postId" },
           new QueryArgument<NonNullGraphType<PostInputType>> { Name = "updatedPost" }),
-        resolve: context => {
-          var postId = context.GetArgument<string>("postId");
-          var updatedPost = context.GetArgument<Post>("updatedPost");
-          updatedPost.Id = postId;
-          return postRepository.Update(postId, updatedPost);
-        }
+        resolve: context => postRepository.Update(context.GetArgument<Post>("updatedPost"))
+      );
+
+      Field<PostType>(
+        "DeletePost",
+        arguments: new QueryArguments(
+          new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "postId" }),
+        resolve: context => postRepository.Delete(context.GetArgument<string>("postId"))
       );
     }
   }

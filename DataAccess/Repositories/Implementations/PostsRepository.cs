@@ -44,10 +44,10 @@ namespace SharePosts.DataAccess.Repositories.Implementations
         .OrderBy(post => post.CreatedAt)
         .ToListAsync();
 
-    public async Task<Post> Update(string id, Post updatedPost)
+    public async Task<Post> Update(Post updatedPost)
     {
       var postDb = await this.context.Posts
-        .FirstOrDefaultAsync(post => post.Id == id);
+        .FirstOrDefaultAsync(post => post.Id == updatedPost.Id);
       if (postDb != null) 
       {
         postDb.Title = updatedPost.Title;
