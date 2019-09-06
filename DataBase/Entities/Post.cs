@@ -9,7 +9,7 @@ namespace SharePosts.DataBase.Entities
     public string Body { get; set; }
     public DateTime CreatedAt { get; set; }
 
-    public string ApplicationUserId { get; set; }
-    public ApplicationUser ApplicationUser { get; set; }
+    public string AuthorId { get; set; }
+    public ApplicationUser Author { get; set; }
   }
 }

@@ -7,8 +7,8 @@ namespace SharePosts.WebApi.Types
     public ApplicationUserInputType()
     {
       Name = "ApplicationUserInput";
-      Field<NonNullGraphType<StringGraphType>>("email");
-      Field<NonNullGraphType<StringGraphType>>("password");
+      Field<StringGraphType>("email");
+      Field<StringGraphType>("password");
       Field<StringGraphType>("userName");
     }
   }

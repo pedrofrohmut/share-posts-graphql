@@ -31,7 +31,7 @@ namespace SharePosts.WebApi.Mutations
           var newPost = context.GetArgument<Post>("newPost");
           return postRepository.Create(newPost);
         }
-      )
+      );
     }
   }
 }

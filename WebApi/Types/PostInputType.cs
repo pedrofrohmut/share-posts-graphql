@@ -10,6 +10,7 @@ namespace SharePosts.WebApi.Types
       Field<StringGraphType>("id");
       Field<StringGraphType>("title");
       Field<StringGraphType>("body");
+      Field<StringGraphType>("authorId");
     }
   }
 }

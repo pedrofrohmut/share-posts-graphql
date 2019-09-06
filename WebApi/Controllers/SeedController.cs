@@ -53,37 +53,37 @@ namespace SharePosts.WebApi.Controllers
         var posts = new List<Post>
         {
           new Post {
-            ApplicationUser = john,
+            Author = john,
             Title = "John Post 1",
             Body = "This is John Post 1 Body content",
             CreatedAt = now
           },
           new Post {
-            ApplicationUser = john,
+            Author = john,
             Title = "John Post 2",
             Body = "This is John Post 2 Body Content",
             CreatedAt = now
           },
           new Post {
-            ApplicationUser = jane,
+            Author = jane,
             Title = "Post 1 From Jane",
             Body = "Jane 1 Body content",
             CreatedAt = now
           },
           new Post {
-            ApplicationUser = jane,
+            Author = jane,
             Title = "Jane 2",
             Body = "This is Jane 2 Post Body Content Here.",
             CreatedAt = now
           },
           new Post {
-            ApplicationUser = bob,
+            Author = bob,
             Title = "Bob 1",
             Body = "This is Bob 1 Post Body",
             CreatedAt = now
           },
           new Post {
-            ApplicationUser = bob,
+            Author = bob,
             Title = "Bob Post 2",
             Body = "This is Bob Post 2 Body of content",
             CreatedAt = now

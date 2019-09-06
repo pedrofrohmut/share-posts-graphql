@@ -13,11 +13,11 @@ namespace SharePosts.WebApi.Types
       Field(post => post.Title);
       Field(post => post.Body);
       Field(post => post.CreatedAt);
-      Field(post => post.ApplicationUserId);
+      Field(post => post.AuthorId);
       Field<ApplicationUserType>(
         "Author",
         resolve: context => 
-          applicationUserRepository.FindById(context.Source.ApplicationUserId)
+          applicationUserRepository.FindById(context.Source.AuthorId)
       );
     }
   }
