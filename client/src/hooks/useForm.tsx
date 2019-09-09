@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
 
-function useForm<T, K>(
+const useForm = <T, K>(
   initialState: T,
   initialErrors: K,
   onValidate: (formData: T) => K,
   onSubmit: (formData: T) => void
-): Array<any> {
+): Array<any> => {
   const [values, setValues] = useState(initialState)
   const [errors, setErrors] = useState(initialErrors)
   const [isLoading, setIsLoading] = useState(false)
