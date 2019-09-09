@@ -1,6 +1,11 @@
 import React, { useState } from "react"
-import IUser from "../models/iuser"
-import IUserErrors from "../models/iuserErrors"
+import { Link } from "react-router-dom"
+import useForm from "../hooks/useForm"
+import IUser, {
+  IUserErrors,
+  getEmailErrors,
+  getPasswordErrors
+} from "../models/iuser"
 import InlineError from "../components/messages/InlineError"
 
 const INITIAL_USER: IUser = {
@@ -13,21 +18,34 @@ const INITIAL_USER_ERRORS: IUserErrors = {
   password: ""
 }
 
+const validateUserSignIn = (formData: IUser): IUserErrors => ({
+  email: getEmailErrors(formData.email),
+  password: getPasswordErrors(formData.password)
+})
+
 const SignInPage: React.FC = () => {
-  const [user, setUser] = useState<IUser>(INITIAL_USER)
-  const [errors, setErrors] = useState<IUserErrors>(INITIAL_USER_ERRORS)
-  if (!user) {
-    return null
+  const onSubmit = (values: IUser) => {
+    console.log("onSubmit", values)
   }
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    console.log("Submit!")
-  }
+  const [
+    values,
+    errors,
+    hasErrors,
+    isLoading,
+    handleChange,
+    handleBlur,
+    handleSubmit
+  ] = useForm<IUser, IUserErrors>(
+    INITIAL_USER,
+    INITIAL_USER_ERRORS,
+    validateUserSignIn,
+    onSubmit
+  )
   return (
     <div className="container SignInPage">
       <div className="row">
-        <div className="col-md-10 mx-auto">
-          <div className="card card-body bg-light mt-5">
+        <div className="col-lg-7 col-md-10 mx-auto">
+          <div className="card card-body bg-light">
             <h1>Sign In | User Authentication</h1>
             <p>
               Provide your credentials so you can sign in as a registered user
@@ -41,8 +59,10 @@ const SignInPage: React.FC = () => {
                   id="email"
                   type="text"
                   name="email"
-                  value={user.email}
-                  onChange={e => setUser({ ...user, email: e.target.value })}
+                  value={values.email}
+                  onChange={handleChange}
+                  onKeyUp={handleBlur}
+                  onBlur={handleBlur}
                   className={`form-control form-control-lg ${errors.email &&
                     "is-invalid"}`}
                 />
@@ -57,17 +77,32 @@ const SignInPage: React.FC = () => {
                   id="password"
                   type="password"
                   name="password"
-                  value={user.password}
-                  onChange={e => setUser({ ...user, password: e.target.name })}
+                  value={values.password}
+                  onChange={handleChange}
+                  onKeyUp={handleBlur}
+                  onBlur={handleBlur}
                   className={`form-control form-control-lg ${errors.password &&
                     "is-invalid"}`}
                 />
                 {errors.password && <InlineError text={errors.password} />}
               </div>
 
-              <button type="submit" className="btn btn-primary">
-                <i className="fa fa-send"></i> Sign In
-              </button>
+              <div className="row">
+                <div className="col">
+                  <button
+                    type="submit"
+                    disabled={hasErrors()}
+                    className="btn btn-primary"
+                  >
+                    <i className="fa fa-send"></i> Sign In
+                  </button>
+                </div>
+                <div className="col">
+                  <Link to="/signup" className="btn btn-light">
+                    No Account? Register here.
+                  </Link>
+                </div>
+              </div>
             </form>
           </div>
         </div>

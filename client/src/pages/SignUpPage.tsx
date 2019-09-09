@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import IUser from "../models/iuser"
-import IUserErrors from "../models/iuserErrors"
+import IUser, { IUserErrors } from "../models/iuser"
 import InlineError from "../components/messages/InlineError"
 
 const INITIAL_USER: IUser = {
@@ -31,8 +30,8 @@ const SignUpPage: React.FC = () => {
   return (
     <div className="container SignUpPage">
       <div className="row">
-        <div className="col-md-10 mx-auto">
-          <div className="card card-body bg-light mt-5">
+        <div className="col-lg-7 col-md-10 mx-auto">
+          <div className="card card-body bg-light">
             <h1>Sign Up | Create a new User</h1>
             <p>Please fill put this form to register with us</p>
             <form onSubmit={handleSubmit}>

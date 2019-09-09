@@ -5,7 +5,7 @@ interface Props {
 }
 
 const InlineError: React.FC<Props> = ({ text }) => (
-  <div className="text-danger py-2 px-4">{text}</div>
+  <div className="invalid-feedback py-2 px-4">{text}</div>
 )
 
 export default InlineError

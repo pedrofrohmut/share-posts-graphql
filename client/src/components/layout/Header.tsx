@@ -2,7 +2,7 @@ import React from "react"
 import { NavLink } from "react-router-dom"
 
 const Header: React.FC = () => (
-  <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+  <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
     <div className="container">
       <a className="navbar-brand mr-5" href="/">
         SharePosts
