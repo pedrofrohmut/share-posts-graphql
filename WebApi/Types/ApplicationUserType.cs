@@ -12,6 +12,7 @@ namespace SharePosts.WebApi.Types
       Field(x => x.UserName);
       Field(x => x.Email);
       Field(x => x.EmailConfirmed);
+      Field(x => x.AuthenticationToken);
     }
   }
 }

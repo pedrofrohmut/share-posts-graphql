@@ -1,4 +1,3 @@
-using System;
 using GraphQL.Types;
 using SharePosts.DataAccess.Repositories;
 using SharePosts.WebApi.Types;
@@ -23,7 +22,7 @@ namespace SharePosts.WebApi.Queries
         arguments: new QueryArguments(
           new QueryArgument<StringGraphType> { Name = "email" }),
         resolve: context => applicationUserRepository
-            .FindByEmail(context.GetArgument<string>("email"))
+          .FindByEmail(context.GetArgument<string>("email"))
       );
 
       Field<ListGraphType<PostType>>(

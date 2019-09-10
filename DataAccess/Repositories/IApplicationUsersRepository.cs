@@ -12,6 +12,11 @@ namespace SharePosts.DataAccess.Repositories
     Task<ApplicationUser> Create(ApplicationUser newUser, string password);
 
     /*
+     * Mutation: Create a new user with userName, email and password
+     */
+    Task<ApplicationUser> Create(string userName, string email, string password);
+
+    /*
      * Query: Find Application User with an email parameter
      */
     Task<ApplicationUser> FindByEmail(string email);
@@ -29,6 +34,6 @@ namespace SharePosts.DataAccess.Repositories
     /*
      * Query: Get Authentication Token passing email and password (Sign In)
      */
-    Task<string> GetAuthenticationToken(string email, string password);
+    Task<ApplicationUser> GetAuthenticatedUser(string email, string password);
   }
 }

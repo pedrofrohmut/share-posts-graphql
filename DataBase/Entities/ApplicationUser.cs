@@ -7,5 +7,8 @@ namespace SharePosts.DataBase.Entities
   {
     [NotMapped]
     public string Password { get; set; }
+
+    [NotMapped]
+    public string AuthenticationToken { get; set; } = null;
   }
 }

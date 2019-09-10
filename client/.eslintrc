@@ -1,14 +1,15 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "env": {
     "browser": true,
     "es6": true
   },
   "extends": [
-    "react-app",
     "airbnb",
+    "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint"
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -26,7 +27,7 @@
     "semi": ["error", "never"],
     "quotes": ["error", "double", { "avoidEscape": true }],
     "comma-dangle": "off",
-    "max-len": ["error", 80, 2],
+    "max-len": ["error", 100, 2],
     "func-names": "off",
     "implicit-arrow-linebreak": "off",
     "no-else-return": "off",
@@ -49,11 +50,8 @@
     "react/no-unescaped-entities": "off"
   },
   "settings": {
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
-    },
-    "import/resolver": {
-      "typescript": {}
+    "react": {
+      "version": "detected"
     }
   }
 }

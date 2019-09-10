@@ -1,11 +1,7 @@
-import React, { useState } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import useForm from "../hooks/useForm"
-import IUser, {
-  IUserErrors,
-  getEmailErrors,
-  getPasswordErrors
-} from "../models/iuser"
+import IUser, { IUserErrors, getEmailErrors, getPasswordErrors } from "../models/iuser"
 import InlineError from "../components/messages/InlineError"
 
 const INITIAL_USER: IUser = {
@@ -24,32 +20,20 @@ const validateUserSignIn = (formData: IUser): IUserErrors => ({
 })
 
 const SignInPage: React.FC = () => {
-  const onSubmit = (values: IUser) => {
+  const onSubmit = (values: IUser): void => {
     console.log("onSubmit", values)
   }
-  const [
-    values,
-    errors,
-    hasErrors,
-    isLoading,
-    handleChange,
-    handleBlur,
-    handleSubmit
-  ] = useForm<IUser, IUserErrors>(
-    INITIAL_USER,
-    INITIAL_USER_ERRORS,
-    validateUserSignIn,
-    onSubmit
-  )
+  const [values, errors, hasErrors, isLoading, handleChange, handleBlur, handleSubmit] = useForm<
+    IUser,
+    IUserErrors
+  >(INITIAL_USER, INITIAL_USER_ERRORS, validateUserSignIn, onSubmit)
   return (
     <div className="container SignInPage">
       <div className="row">
         <div className="col-lg-7 col-md-10 mx-auto">
           <div className="card card-body bg-light">
             <h1>Sign In | User Authentication</h1>
-            <p>
-              Provide your credentials so you can sign in as a registered user
-            </p>
+            <p>Provide your credentials so you can sign in as a registered user</p>
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="email">
@@ -63,8 +47,7 @@ const SignInPage: React.FC = () => {
                   onChange={handleChange}
                   onKeyUp={handleBlur}
                   onBlur={handleBlur}
-                  className={`form-control form-control-lg ${errors.email &&
-                    "is-invalid"}`}
+                  className={`form-control form-control-lg ${errors.email && "is-invalid"}`}
                 />
                 {errors.email && <InlineError text={errors.email} />}
               </div>
@@ -81,19 +64,14 @@ const SignInPage: React.FC = () => {
                   onChange={handleChange}
                   onKeyUp={handleBlur}
                   onBlur={handleBlur}
-                  className={`form-control form-control-lg ${errors.password &&
-                    "is-invalid"}`}
+                  className={`form-control form-control-lg ${errors.password && "is-invalid"}`}
                 />
                 {errors.password && <InlineError text={errors.password} />}
               </div>
 
               <div className="row">
                 <div className="col">
-                  <button
-                    type="submit"
-                    disabled={hasErrors()}
-                    className="btn btn-primary"
-                  >
+                  <button type="submit" disabled={hasErrors()} className="btn btn-primary">
                     <i className="fa fa-send"></i> Sign In
                   </button>
                 </div>

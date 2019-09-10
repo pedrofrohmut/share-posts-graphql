@@ -14,12 +14,30 @@ namespace SharePosts.WebApi.Mutations
       Name = "Mutation";
 
       Field<ApplicationUserType>(
-        "CreateApplicationUser",
+        "SignUp",
         arguments: new QueryArguments(
-          new QueryArgument<NonNullGraphType<ApplicationUserInputType>> { Name = "newApplicationUser" }),
-        resolve: context => {
-          var user = context.GetArgument<ApplicationUser>("newApplicationUser");
-          return applicationUserRepository.Create(user, user.Password);
+          new QueryArgument<StringGraphType> { Name = "userName" },
+          new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "email" },
+          new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "password" }),
+        resolve: context => 
+        {
+          var userName = context.GetArgument<string>("userName");
+          var email = context.GetArgument<string>("email");
+          var password = context.GetArgument<string>("password");
+          return applicationUserRepository.Create(userName, email, password);
+        }
+      );
+
+      Field<ApplicationUserType>(
+        "SignIn",
+        arguments: new QueryArguments(
+          new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "email" },
+          new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "password" }),
+        resolve: context => 
+        {
+          var email = context.GetArgument<string>("email");
+          var password = context.GetArgument<string>("password");
+          return applicationUserRepository.GetAuthenticatedUser(email, password);
         }
       );
 

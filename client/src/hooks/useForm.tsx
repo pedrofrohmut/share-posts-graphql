@@ -1,18 +1,17 @@
-import { useState, useEffect } from "react"
+import React from "react"
 
 const useForm = <T, K>(
   initialState: T,
   initialErrors: K,
   onValidate: (formData: T) => K,
-  onSubmit: (formData: T) => void
+  onSubmit: (formData: T) => any
 ): Array<any> => {
-  const [values, setValues] = useState(initialState)
-  const [errors, setErrors] = useState(initialErrors)
-  const [isLoading, setIsLoading] = useState(false)
-  const hasErrors = (): boolean =>
-    !Object.values(errors).every(error => error === "")
+  const [values, setValues] = React.useState(initialState)
+  const [errors, setErrors] = React.useState(initialErrors)
+  const [isLoading, setIsLoading] = React.useState(false)
+  const hasErrors = (): boolean => !Object.values(errors).every(error => error === "")
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const name = event.target.name
+    const { name } = event.target
     const value = event.target.checked ? true : event.target.value
     setValues({ ...values, [name]: value })
   }
@@ -20,23 +19,16 @@ const useForm = <T, K>(
     const updatedErrors = onValidate(values)
     setErrors(updatedErrors)
   }
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): any => {
     event.preventDefault()
     if (!hasErrors()) {
       setIsLoading(true)
       // TODO: check it again when connected to redux thunk
-      onSubmit(values)
+      return onSubmit(values)
     }
+    return undefined
   }
-  return [
-    values,
-    errors,
-    hasErrors,
-    isLoading,
-    handleChange,
-    handleBlur,
-    handleSubmit
-  ]
+  return [values, errors, hasErrors, isLoading, handleChange, handleBlur, handleSubmit]
 }
 
 export default useForm
