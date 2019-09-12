@@ -39,15 +39,19 @@
     ],
     "jsx-a11y/label-has-associated-control": "off",
     "jsx-a11y/label-has-for": "off",
+    "import/no-unresolved": "error",
     "import/order": "off",
-    "global-require": "off",
     "import/prefer-default-export": "off",
+    "global-require": "off",
     "no-unused-expressions": ["error", { "allowTaggedTemplates": true }],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/destructuring-assignment": "off",
     "react/no-access-state-in-setstate": "off",
     "react/no-unescaped-entities": "off"
+  },
+  "import/resolver": {
+    "typescript": {}
   },
   "settings": {
     "react": {

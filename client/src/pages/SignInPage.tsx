@@ -3,6 +3,11 @@ import { Link } from "react-router-dom"
 import useForm from "../hooks/useForm"
 import IUser, { IUserErrors, getEmailErrors, getPasswordErrors } from "../models/iuser"
 import InlineError from "../components/messages/InlineError"
+import { connect } from "react-redux"
+import { applicationUserLoggedInThunk } from "../store/thunks/applicationUser"
+import { ThunkAction } from "redux-thunk"
+import { Action } from "redux"
+import { AppState } from "../store/rootReducer"
 
 const INITIAL_USER: IUser = {
   email: "",
@@ -19,9 +24,14 @@ const validateUserSignIn = (formData: IUser): IUserErrors => ({
   password: getPasswordErrors(formData.password)
 })
 
-const SignInPage: React.FC = () => {
+interface Props {
+  onSignIn: (credentials: IUser) => void
+}
+
+const SignInPage: React.FC<Props> = ({ onSignIn }) => {
   const onSubmit = (values: IUser): void => {
     console.log("onSubmit", values)
+    onSignIn(values)
   }
   const [values, errors, hasErrors, isLoading, handleChange, handleBlur, handleSubmit] = useForm<
     IUser,
@@ -89,4 +99,7 @@ const SignInPage: React.FC = () => {
   )
 }
 
-export default SignInPage
+export default connect(
+  null,
+  { onSignIn: applicationUserLoggedInThunk }
+)(SignInPage)
