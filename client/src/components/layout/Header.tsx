@@ -1,7 +1,13 @@
 import React from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, Link } from "react-router-dom"
+import { connect } from "react-redux"
+import { applicationUserLoggedOutThunk } from "../../store/thunks/applicationUser"
 
-const Header: React.FC = () => (
+interface Props {
+  thunkSignOut: () => void
+}
+
+const Header: React.FC<Props> = ({ thunkSignOut }) => (
   <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
     <div className="container">
       <a className="navbar-brand mr-5" href="/">
@@ -16,7 +22,7 @@ const Header: React.FC = () => (
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span className="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon" />
       </button>
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -44,10 +50,18 @@ const Header: React.FC = () => (
               Sign Up
             </NavLink>
           </li>
+          <li className="nav-item">
+            <Link to="/" className="nav-link" onClick={thunkSignOut}>
+              Sign Out
+            </Link>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 )
 
-export default Header
+export default connect(
+  null,
+  { thunkSignOut: applicationUserLoggedOutThunk }
+)(Header)
