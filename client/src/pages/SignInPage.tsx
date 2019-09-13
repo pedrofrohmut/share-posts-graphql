@@ -4,6 +4,7 @@ import useForm from "../hooks/useForm"
 import IUser, { IUserErrors, getEmailErrors, getPasswordErrors } from "../models/iuser"
 import IApplicationUserState from "../store/states/IApplicationUserState"
 import InlineError from "../components/messages/InlineError"
+import LoadingSpinner from "../components/loading/LoadingSpinner"
 
 import { connect } from "react-redux"
 import { applicationUserLoggedInThunk } from "../store/thunks/applicationUser"
@@ -59,6 +60,9 @@ const SignInPage: React.FC<Props> = ({ thunkSignIn, history }) => {
     IUser,
     IUserErrors
   >(INITIAL_USER, INITIAL_USER_ERRORS, validateUserSignIn, onSubmit)
+  if (isLoading) {
+    return <LoadingSpinner />
+  }
   return (
     <div className="container SignInPage">
       <div className="row">
